@@ -49,7 +49,8 @@ public class AlunoController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Retorna o Aluno e Atualiza o Cadastro"),
             @ApiResponse(responseCode = "201", description = "Atualização Realizada"),
-            @ApiResponse(responseCode = "400", description = "Aluno não Encontrado")
+            @ApiResponse(responseCode = "400", description = "Requisição Inválida")
+            @ApiResponse(responseCode = "404", description = "Aluno Não Encontrado")
     })
     @PutMapping(path = "/api/aluno/{id}")
     public ResponseEntity<AlunoModel> atualizarAluno(@PathVariable("id") Integer id, @RequestBody AlunoModel aluno) {
@@ -71,7 +72,8 @@ public class AlunoController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Retorna o Aluno e Atualiza o Cadastro"),
             @ApiResponse(responseCode = "201", description = "Atualização Realizada"),
-            @ApiResponse(responseCode = "400", description = "Aluno não Encontrado")
+            @ApiResponse(responseCode = "400", description = "Requisição Inválida")
+            @ApiResponse(responseCode = "404", description = "Aluno Não Encontrado")
     })
     @PatchMapping(path = "/api/aluno/{id}")
     public ResponseEntity<AlunoModel> atualizarInfoAluno(@PathVariable("id") Integer id, @RequestBody AlunoModel aluno) {
@@ -93,7 +95,8 @@ public class AlunoController {
     @Operation(description = "Busca o Aluno pelo ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Deleta o Aluno"),
-            @ApiResponse(responseCode = "400", description = "Aluno não Encontrado")
+            @ApiResponse(responseCode = "400", description = "Requisição Inválida")
+            @ApiResponse(responseCode = "404", description = "Aluno Não Encontrado")
     })
     @DeleteMapping(path = "/api/aluno/{id}")
     public ResponseEntity<AlunoModel> deletarAluno(@PathVariable("id") Integer id){
