@@ -37,7 +37,7 @@ public class AlunoController {
 
     @Operation(description = "Cadastra o Aluno")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Retorna o Aluno e faz a alteração"),
+            @ApiResponse(responseCode = "200", description = "Retorna o Aluno e Realiza o Cadastro"),
             @ApiResponse(responseCode = "201", description = "Cadastro Realizado"),
     })
     @PostMapping(path = "/api/aluno/salvar")
