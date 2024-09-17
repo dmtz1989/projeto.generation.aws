@@ -38,6 +38,7 @@ public class AlunoController {
     @Operation(description = "Cadastra o Aluno")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Retorna o Aluno e faz a alteração"),
+            @ApiResponse(responseCode = "201", description = "Cadastro Realizado"),
     })
     @PostMapping(path = "/api/aluno/salvar")
     public AlunoModel salvarAluno(@RequestBody AlunoModel aluno){
@@ -46,7 +47,8 @@ public class AlunoController {
 
     @Operation(description = "Busca o Aluno pelo ID e faz alterações no Cadastro")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Retorna o Aluno e Realiza o Cadastro"),
+            @ApiResponse(responseCode = "200", description = "Retorna o Aluno e Atualiza o Cadastro"),
+            @ApiResponse(responseCode = "201", description = "Atualização Realizada"),
             @ApiResponse(responseCode = "400", description = "Aluno não Encontrado")
     })
     @PutMapping(path = "/api/aluno/{id}")
@@ -65,6 +67,29 @@ public class AlunoController {
         return ResponseEntity.ok(atualizadoAluno);
     }
 
+    @Operation(description = "Busca o Aluno pelo ID e faz alterações no Cadastro")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Retorna o Aluno e Atualiza o Cadastro"),
+            @ApiResponse(responseCode = "201", description = "Atualização Realizada"),
+            @ApiResponse(responseCode = "400", description = "Aluno não Encontrado")
+    })
+    @PatchMapping(path = "/api/aluno/{id}")
+    public ResponseEntity<AlunoModel> atualizarInfoAluno(@PathVariable("id") Integer id, @RequestBody AlunoModel aluno) {
+        AlunoModel alterarAluno = repository.findById(id)
+                .orElse(ResponseEntity.notFound().<AlunoModel>build().getBody());
+
+        alterarAluno.setId();
+        alterarAluno.setNome();
+        alterarAluno.setNotaPrimeiroSemestre();
+        alterarAluno.setNotaSegundoSemestre();
+        alterarAluno.setNomeProfessor();
+        alterarAluno.setSala();
+
+        AlunoModel atualizadoAluno = repository.save(aluno);
+        return ResponseEntity.ok(atualizadoAluno);
+    }
+
+    
     @Operation(description = "Busca o Aluno pelo ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Deleta o Aluno"),
